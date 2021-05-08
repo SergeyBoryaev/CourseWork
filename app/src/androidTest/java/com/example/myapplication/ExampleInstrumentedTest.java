@@ -49,7 +49,7 @@ public class ExampleInstrumentedTest {
         settingsButton.click();
         device.wait(Until.hasObject(By.res("com.weather.Weather:id/item_settings")), 8000);
         UiObject settings2Button = new UiObject(new UiSelector().text("Settings"));
-        assertTrue("Cannot open settings button", settings2Button.exists());
+        assertTrue("Cannot find settings button", settings2Button.exists());
     }
 
     @Test
@@ -121,7 +121,7 @@ public class ExampleInstrumentedTest {
         settingsButton.click();
         device.wait(Until.hasObject(By.res("com.weather.Weather:id/search_text")), 8000);
         UiObject settings2Button = new UiObject(new UiSelector().text("Search City or Zip"));
-        assertTrue("Cannot open search button", settings2Button.exists());
+        assertTrue("Cannot find search menu", settings2Button.exists());
     }
 
     @Test
@@ -211,7 +211,7 @@ public class ExampleInstrumentedTest {
         settingsButton.click();
         device.wait(Until.hasObject(By.res("com.weather.Weather:id/toolbar_title")), 8000);
         UiObject settings2Button = new UiObject(new UiSelector().resourceId("com.weather.Weather:id/my_alert_settings_tablayout"));
-        assertTrue("Cannot open notification button", settings2Button.exists());
+        assertTrue("Cannot open notification menu", settings2Button.exists());
     }
 
     @Test
@@ -225,7 +225,7 @@ public class ExampleInstrumentedTest {
             manageButton.click();
             device.wait(Until.hasObject(By.text("Flu Risk")), 8000);
             UiObject check = new UiObject(new UiSelector().text("Flu Risk"));
-            assertTrue("Cannot open manage button", check.exists());
+            assertTrue("Cannot open manage menu", check.exists());
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
         }
@@ -262,7 +262,7 @@ public class ExampleInstrumentedTest {
         settingsButton.click();
         device.wait(Until.hasObject(By.res("com.weather.Weather:id/hourly_container")), 8000);
         UiObject settings2Button = new UiObject(new UiSelector().className("androidx.recyclerview.widget.RecyclerView"));
-        assertTrue("Cannot open hourly button", settings2Button.exists());
+        assertTrue("Cannot open hourly menu", settings2Button.exists());
     }
 
     @Test
@@ -312,7 +312,7 @@ public class ExampleInstrumentedTest {
         settingsButton.click();
         device.wait(Until.hasObject(By.res("com.weather.Weather:id/day_part_container")), 8000);
         UiObject settings2Button = new UiObject(new UiSelector().resourceId("com.weather.Weather:id/day_part_container"));
-        assertTrue("Cannot open daily button", settings2Button.exists());
+        assertTrue("Cannot open daily menu", settings2Button.exists());
     }
 
     @Test
@@ -332,6 +332,6 @@ public class ExampleInstrumentedTest {
         settingsButton.click();
         device.wait(Until.hasObject(By.res("com.weather.Weather:id/video_fragment_container")), 8000);
         UiObject settings2Button = new UiObject(new UiSelector().resourceId("com.weather.Weather:id/video_fragment_container"));
-        assertTrue("Cannot open videos button", settings2Button.exists());
+        assertTrue("Cannot open videos menu", settings2Button.exists());
     }
 }
