@@ -142,6 +142,23 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
+    public void badSearch() {
+        device.wait(Until.hasObject(By.res("com.weather.Weather:id/search_icon")), 8000);
+        UiObject2 settingsButton = device.findObject(By.res("com.weather.Weather:id/search_icon"));
+        settingsButton.click();
+        device.wait(Until.hasObject(By.res("com.weather.Weather:id/search_text")), 8000);
+        UiObject settings2Button = new UiObject(new UiSelector().text("Search City or Zip"));
+        try {
+            settings2Button.setText("asdasdf");
+            device.wait(Until.hasObject(By.text("Cannot Find Location")), 8000);
+            UiObject check = new UiObject(new UiSelector().text("Cannot Find Location"));
+            assertTrue("search 'asdasdf' have any results", check.exists());
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void openLAInterface() {
         device.wait(Until.hasObject(By.res("com.weather.Weather:id/search_icon")), 8000);
         UiObject2 settingsButton = device.findObject(By.res("com.weather.Weather:id/search_icon"));
@@ -266,6 +283,16 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
+    public void anotherHourlyButton() {
+        device.wait(Until.hasObject(By.text("Hourly")), 8000);
+        UiObject2 settingsButton = device.findObject(By.text("See Details"));
+        settingsButton.click();
+        device.wait(Until.hasObject(By.res("com.weather.Weather:id/hourly_container")), 8000);
+        UiObject settings2Button = new UiObject(new UiSelector().className("androidx.recyclerview.widget.RecyclerView"));
+        assertTrue("Cannot open hourly menu", settings2Button.exists());
+    }
+
+    @Test
     public void extendHourlyButton() {
         device.wait(Until.hasObject(By.text("Hourly")), 8000);
         UiObject2 settingsButton = device.findObject(By.text("Hourly"));
@@ -333,5 +360,28 @@ public class ExampleInstrumentedTest {
         device.wait(Until.hasObject(By.res("com.weather.Weather:id/video_fragment_container")), 8000);
         UiObject settings2Button = new UiObject(new UiSelector().resourceId("com.weather.Weather:id/video_fragment_container"));
         assertTrue("Cannot open videos menu", settings2Button.exists());
+    }
+
+    @Test
+    public void randomClick() {
+        device.wait(Until.hasObject(By.res("com.weather.Weather:id/current_conditions_temperature_feels_like")), 8000);
+        UiObject conditionsButton = new UiObject(new UiSelector().resourceId("com.weather.Weather:id/current_conditions_temperature_feels_like"));
+        try {
+            assertFalse("Screen has been updated after random click", conditionsButton.clickAndWaitForNewWindow());
+
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void rotation() {
+        device.wait(Until.hasObject(By.text("Videos")), 8000);
+        try {
+            device.setOrientationRight();
+            assertFalse("Screen has been updated after rotation", device.waitForWindowUpdate("com.weather.Weather", 10));
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        }
     }
 }
